@@ -156,17 +156,17 @@ function execute_choice {
     esac
 }
 
-if [ -z "$1" ]; then
+if [ -z "${AUTOMATED+x}" ]; then
+    # Automated mode, var set in Dockerfile
+    for arg in "$@"; do
+        execute_choice $arg
+    done
+else
     # Interactive mode
     while true; do
         show_menu
         read -p "Enter your choice: " choice </dev/tty
         execute_choice $choice
         echo
-    done
-else
-    # Automated mode
-    for arg in "$@"; do
-        execute_choice $arg
     done
 fi
