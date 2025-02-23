@@ -1,0 +1,88 @@
+## Other constants.
+source /etc/os-release
+case $(uname -m) in
+x86_64)
+    arch="x64"
+    ;;
+aarch64)
+    arch="arm64"
+    ;;
+*)
+    echo "Unsupported architecture, exiting..."
+    exit 1
+    ;;
+esac
+
+export arch
+
+declare -A distro_support_list
+distro_support_list["ubuntu"]="20.04 22.04 24.04"
+distro_support_list["fedora"]="38 39 40 41"
+distro_support_list["linuxmint"]="20 21 22"
+distro_support_list["debian"]="10 11 12"
+distro_support_list["rockylinux"]="8 9"
+distro_support_list["almalinux"]="8 9"
+
+source /etc/os-release
+
+distro_id="$ID"
+distro_version="$VERSION_ID"
+
+is_version_supported() {
+    if command -v pacman || command -v zypper; then
+        return 0
+    fi
+
+    local distro=$1
+    local version=$2
+    local supported_versions="${distro_support_list[$distro]}"
+
+    for v in $supported_versions; do
+        if [ "$v" == "$version" ]; then
+            return 0
+        fi
+    done
+    return 1
+}
+
+if ! is_version_supported "$distro_id" "$distro_version"; then
+    echo "Unsupported distribution, exiting..."
+    exit 1
+fi
+
+os="linux"
+if [[ "$(uname)" == "Darwin" ]]; then
+    os="osx"
+    return 0
+fi
+
+export os
+
+sudo_cmd=""
+if [ "$EUID" -ne 0 ]; then
+    sudo_cmd="sudo "
+fi
+
+export sudo_cmd
+
+os="linux"
+if [[ $(uname -s) == "Darwin" ]]; then
+    os="darwin"
+fi
+
+export os
+
+declare -A package_managers=(
+    [apt]="$sudo_cmd apt update -y && $sudo_cmd apt install -y ffmpeg curl"
+    [dnf]="$sudo_cmd dnf install -y ffmpeg curl"
+    [pacman]="pacman -Sy --noconfirm ffmpeg pipewire-jack curl"
+    [zypper]="$sudo_cmd zypper refresh && $sudo_cmd zypper install -y ffmpeg curl"
+    [brew]="brew update && brew install ffmpeg python curl"
+)
+
+for pm in "${!package_managers[@]}"; do
+    if command -v "$pm" &>/dev/null; then
+        export INSTALL_CMD="${package_managers[$pm]}"
+        break
+    fi
+done

@@ -86,10 +86,10 @@ function install_music_deps {
     "linux_arm64")
         yt_dlp_url="${yt_dlp_url}_linux__arm64"
         ;;
-    "macos_arm64")
+    "osx_arm64")
         yt_dlp_url="${yt_dlp_url}_macos"
         ;;
-    "macos_x64")
+    "osx_x64")
         yt_dlp_url="${yt_dlp_url}_macos_legacy"
         ;;
     *)
