@@ -1,2 +1,2 @@
-`curl -sSL https://raw.githubusercontent.com/Snake26183/nadeko-installer/refs/heads/main/Nadeko.sh | bash`\
-`wget -qO- https://raw.githubusercontent.com/Snake26183/nadeko-installer/refs/heads/main/Nadeko.sh | bash`
+`curl -O https://raw.githubusercontent.com/Snake26183/nadeko-installer/refs/heads/main/Nadeko.sh && bash Nadeko.sh`\
+`wget https://raw.githubusercontent.com/Snake26183/nadeko-installer/refs/heads/main/Nadeko.sh && bash Nadeko.sh`
