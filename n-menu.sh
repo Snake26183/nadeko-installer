@@ -32,7 +32,7 @@ function install_nadeko {
             else
                 echo "Invalid selection. Please try again."
             fi
-        done
+        done </dev/tty
 
         echo "Downloading '${version}' for '${os}-${arch}'..."
         tar_url="https://github.com/nadeko-bot/nadekobot/releases/download/${version}/nadeko-${os}-${arch}.tar.gz"
@@ -158,7 +158,6 @@ function execute_choice {
         ;;
     esac
 }
-
 
 if [ -n "$AUTOMATED" ]; then
     # Automated mode, var set in Dockerfile
