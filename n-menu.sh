@@ -68,6 +68,11 @@ function install_music_deps {
     if [ -n "$AUTOMATED" ]; then
         echo "Running in automated mode, skipping prompts..."
     else
+        if [ ! -d nadeko ]; then
+            echo "Nadeko is not installed, please install it first, returning to main menu..."
+            return 1
+        fi
+
         echo "About to update repositories and run $INSTALL_CMD"
         read -p "Proceed? (y/n): " response </dev/tty
         if [[ "$response" == "n" ]]; then
@@ -83,7 +88,7 @@ function install_music_deps {
 
     eval $INSTALL_CMD
 
-    # Create symlinks for libopus and libsodium to support multi arch
+    # Create symlinks for libopus and libsodium to support multi arch and partially musl/alpine
     libsodium_path=ldconfig -p | grep "libsodium" | awk '{print $4}' | head -n 1
     libopus_path=ldconfig -p | grep "libopus" | awk '{print $4}' | head -n 1
     ln -sf $libsodium_path nadeko/data/lib/libsodium.so
@@ -108,7 +113,6 @@ function install_music_deps {
 
     $sudo_cmd curl -L "$yt_dlp_url" -o /usr/bin/yt-dlp
     $sudo_cmd chmod +x /usr/bin/yt-dlp
-
 }
 
 function set_token {
