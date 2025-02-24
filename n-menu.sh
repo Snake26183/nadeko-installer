@@ -44,8 +44,9 @@ function install_nadeko {
     }
 
     handle_migration
-
-    mv "nadeko-$os-$arch" nadeko
+    echo "os $os"
+    echo "arch $arch"
+    mv nadeko-$os-$arch nadeko
 
     chmod +x nadeko/NadekoBot
     echo "Installation complete!"
