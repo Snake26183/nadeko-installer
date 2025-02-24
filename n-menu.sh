@@ -83,11 +83,17 @@ function install_music_deps {
 
     eval $INSTALL_CMD
 
+    # Create symlinks for libopus and libsodium to support multi arch
+    libsodium_path=ldconfig -p | grep "libsodium" | awk '{print $4}' | head -n 1
+    libopus_path=ldconfig -p | grep "libopus" | awk '{print $4}' | head -n 1
+    ln -sf $libsodium_path nadeko/data/lib/libsodium.so
+    ln -sf $libopus_path nadeko/data/lib/opus.so
+
     yt_dlp_url=https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 
     case "${os}_${arch}" in
     "linux_arm64")
-        yt_dlp_url="${yt_dlp_url}_linux__arm64"
+        yt_dlp_url="${yt_dlp_url}_linux_arm64"
         ;;
     "osx_arm64")
         yt_dlp_url="${yt_dlp_url}_macos"
