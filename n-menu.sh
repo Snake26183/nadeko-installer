@@ -10,7 +10,10 @@ function run_nadeko {
     fi
 
     echo "Attempting to run NadekoBot..."
-    nadeko/NadekoBot || return 1
+    (
+        cd nadeko || exit 1
+        ./NadekoBot || exit 1
+    )
 }
 
 function install_nadeko {
@@ -21,7 +24,7 @@ function install_nadeko {
         local version
 
         PS3="Please select a version: "
-        select bot_version in "${versions[@]}"; do
+        select bot_version in "${version_array[@]}"; do
             if [ -n "$bot_version" ]; then
                 echo "You selected version: $bot_version"
                 version="$bot_version"
@@ -78,7 +81,7 @@ function install_music_deps {
         $sudo_cmd dnf install https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm
     fi
 
-    $INSTALL_CMD
+    eval $INSTALL_CMD
 
     yt_dlp_url=https://github.com/yt-dlp/yt-dlp/releases/latest/download/yt-dlp
 
@@ -138,7 +141,7 @@ function execute_choice {
         run_nadeko
         ;;
     2)
-        install_bot
+        install_nadeko
         ;;
     3)
         install_music_deps
@@ -156,7 +159,8 @@ function execute_choice {
     esac
 }
 
-if [ -z "${AUTOMATED+x}" ]; then
+
+if [ -n "$AUTOMATED" ]; then
     # Automated mode, var set in Dockerfile
     for arg in "$@"; do
         execute_choice $arg
