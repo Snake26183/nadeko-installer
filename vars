@@ -21,8 +21,8 @@ distro_support_list["ubuntu"]="20.04 22.04 24.04"
 distro_support_list["fedora"]="38 39 40 41"
 distro_support_list["linuxmint"]="20 21 22"
 distro_support_list["debian"]="10 11 12"
-distro_support_list["rockylinux"]="8 9"
-distro_support_list["almalinux"]="8 9"
+distro_support_list["rocky"]="8.* 9.*"
+distro_support_list["almalinux"]="8.* 9.*"
 
 source /etc/os-release
 
@@ -39,7 +39,7 @@ is_version_supported() {
     local supported_versions="${distro_support_list[$distro]}"
 
     for v in $supported_versions; do
-        if [ "$v" == "$version" ]; then
+        if [[ "$v" == "$version" ]]; then
             return 0
         fi
     done
