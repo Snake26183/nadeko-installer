@@ -1,3 +1,4 @@
+#!/bin/bash
 ## Other constants.
 source /etc/os-release
 case $(uname -m) in
