@@ -39,7 +39,7 @@ is_version_supported() {
     local supported_versions="${distro_support_list[$distro]}"
 
     for v in $supported_versions; do
-        if [[ "$v" == "$version" ]]; then
+        if [[ "$version" == "$v" ]]; then
             return 0
         fi
     done

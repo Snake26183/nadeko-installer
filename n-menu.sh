@@ -2,7 +2,7 @@
 set -xe
 
 # Distro check and prep
-source <(curl -fsSL https://raw.githubusercontent.com/Snake26183/nadeko-installer/refs/heads/main/vars)
+source <(curl -fsSL https://raw.githubusercontent.com/Snake26183/nadeko-installer/refs/heads/main/vars 2>/dev/null)
 
 function run_nadeko {
     if [[ ! -f nadeko/data/creds.yml ]]; then

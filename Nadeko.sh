@@ -1,4 +1,5 @@
 #!/bin/bash
+set -xe
 echo ""
 echo "Welcome to NadekoBot."
 echo "Downloading the latest installer..."
