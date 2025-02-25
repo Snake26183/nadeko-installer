@@ -86,7 +86,7 @@ function install_music_deps {
         $sudo_cmd dnf install -y epel-release
         $sudo_cmd dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm
         $sudo_cmd dnf install -y https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm
-        $sudo_cmd dnf install -y ffmpeg curl
+        $sudo_cmd dnf install -y ffmpeg curl --skip-broken
     else
         eval $INSTALL_CMD
     fi
