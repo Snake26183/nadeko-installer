@@ -81,12 +81,13 @@ function install_music_deps {
         fi
     fi
 
-    if [ $distro_id == "rocky" ] || [ $distro_id == "almalinux" ]; then
+    if [ $distro_id == "almalinux" ] || [ $distro_id == "rocky" ]; then
         $sudo_cmd dnf update -y
+        $sudo_cmd dnf install -y dnf-plugins-core
         $sudo_cmd dnf install -y epel-release
-        $sudo_cmd dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm
-        $sudo_cmd dnf install -y https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm
-        $sudo_cmd dnf install -y ffmpeg curl --skip-broken
+        $sudo_cmd dnf config-manager --add-repo=https://negativo17.org/repos/epel-multimedia.repo
+        $sudo_cmd dnf config-manager --set-enabled powertools
+        $sudo_cmd dnf install -y ffmpeg
     else
         eval $INSTALL_CMD
     fi
