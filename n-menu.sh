@@ -84,6 +84,7 @@ function install_music_deps {
     if command -v dnf; then
         $sudo_cmd dnf update -y
         $sudo_cmd dnf install -y epel-release
+        $sudo_cmd dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm
         $sudo_cmd dnf install -y https://download1.rpmfusion.org/nonfree/el/rpmfusion-nonfree-release-$(rpm -E %rhel).noarch.rpm
     fi
 
