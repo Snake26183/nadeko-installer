@@ -81,6 +81,7 @@ function install_music_deps {
         fi
     fi
 
+    echo $ID
     if [ $ID == "rocky" ] || [ $ID == "almalinux" ]; then
         $sudo_cmd dnf update -y
         $sudo_cmd dnf install -y epel-release
