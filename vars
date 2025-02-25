@@ -79,7 +79,7 @@ declare -A package_managers=(
     [apt]="$sudo_cmd apt update -y && $sudo_cmd apt install -y ffmpeg"
     [dnf]="$sudo_cmd dnf install -y ffmpeg-free"
     [pacman]="pacman -Sy --noconfirm ffmpeg pipewire-jack"
-    [zypper]="$sudo_cmd zypper refresh && $sudo_cmd zypper install -y ffmpeg gawk"
+    [zypper]="$sudo_cmd zypper refresh && $sudo_cmd zypper install -y ffmpeg libsodium-devel libicu-devel"
     [brew]="brew update && brew install ffmpeg"
 )
 
