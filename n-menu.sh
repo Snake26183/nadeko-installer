@@ -81,21 +81,7 @@ function install_music_deps {
         fi
     fi
 
-    if [ $distro_id == "almalinux" ] || [ $distro_id == "rocky" ]; then
-        if [[ $distro_version == "9.*" ]]; then
-            $sudo_cmd dnf -y install --nogpgcheck https://mirrors.rpmfusion.org/free/el/rpmfusion-free-release-9.noarch.rpm && \
-            $sudo_cmd dnf  config-manager --set-enabled crb && \
-            $sudo_cmd dnf -y install ffmpeg
-        else
-            $sudo_cmd dnf update -y
-            $sudo_cmd dnf install -y dnf-plugins-core epel-release
-            $sudo_cmd dnf config-manager --add-repo=https://negativo17.org/repos/epel-multimedia.repo
-            $sudo_cmd dnf config-manager --set-enabled powertools
-            $sudo_cmd dnf install -y ffmpeg
-        fi
-    else
-        eval $INSTALL_CMD
-    fi
+    eval $INSTALL_CMD
 
     # Create symlinks for libopus and libsodium to support multi arch and partially musl/alpine
     libsodium_path=$(ldconfig -p | grep "libsodium" | awk '{print $4}' | head -n 1)
