@@ -26,9 +26,10 @@ distro_support_list["almalinux"]="8.* 9.*"
 
 source /etc/os-release
 
-export ID
 distro_id="$ID"
 distro_version="$VERSION_ID"
+
+export distro_id
 
 is_version_supported() {
     if command -v pacman || command -v zypper; then
