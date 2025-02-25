@@ -3,6 +3,8 @@
 set -xeo pipefail
 ./Nadeko.sh 2 3 5
 
+yt-dlp -o - "https://www.youtube.com/watch?v=jNQXAC9IVRw" | ffmpeg -i pipe: -f null -
+
 ./Nadeko.sh 1 > app_output.log 2>&1 &
 
 APP_PID=$!
