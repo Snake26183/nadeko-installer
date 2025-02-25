@@ -92,6 +92,7 @@ function install_music_deps {
             $sudo_cmd dnf config-manager --add-repo=https://negativo17.org/repos/epel-multimedia.repo
             $sudo_cmd dnf config-manager --set-enabled powertools
             $sudo_cmd dnf install -y ffmpeg
+        fi
     else
         eval $INSTALL_CMD
     fi
