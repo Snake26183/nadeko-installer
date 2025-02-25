@@ -75,7 +75,7 @@ export os
 
 declare -A package_managers=(
     [apt]="$sudo_cmd apt update -y && $sudo_cmd apt install -y ffmpeg curl"
-    [dnf]="$sudo_cmd dnf install -y ffmpeg curl"
+    [dnf]="$sudo_cmd dnf install -y ffmpeg-free curl"
     [pacman]="pacman -Sy --noconfirm ffmpeg pipewire-jack curl"
     [zypper]="$sudo_cmd zypper refresh && $sudo_cmd zypper install -y ffmpeg curl"
     [brew]="brew update && brew install ffmpeg python curl"
