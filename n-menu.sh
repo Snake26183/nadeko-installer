@@ -81,7 +81,7 @@ function install_music_deps {
         fi
     fi
 
-    if [ $os == "rocky" ] || [ $os == "almalinux" ]; then
+    if [ $ID == "rocky" ] || [ $ID == "almalinux" ]; then
         $sudo_cmd dnf update -y
         $sudo_cmd dnf install -y epel-release
         $sudo_cmd dnf install -y https://download1.rpmfusion.org/free/el/rpmfusion-free-release-$(rpm -E %rhel).noarch.rpm
