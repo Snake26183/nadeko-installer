@@ -30,6 +30,7 @@ distro_id="$ID"
 distro_version="$VERSION_ID"
 
 export distro_id
+export distro_version
 
 is_version_supported() {
     if command -v pacman || command -v zypper; then
@@ -80,7 +81,7 @@ declare -A package_managers=(
     [apt]="$sudo_cmd apt update -y && $sudo_cmd apt install -y ffmpeg"
     [dnf]="$sudo_cmd dnf install -y ffmpeg-free"
     [pacman]="pacman -Sy --noconfirm ffmpeg pipewire-jack"
-    [zypper]="$sudo_cmd zypper refresh && $sudo_cmd zypper install -y ffmpeg"
+    [zypper]="$sudo_cmd zypper refresh && $sudo_cmd zypper install -y ffmpeg gawk"
     [brew]="brew update && brew install ffmpeg"
 )
 
