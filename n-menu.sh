@@ -1,5 +1,5 @@
 #!/bin/bash
-set -xe
+set -xeo pipefail
 
 # Distro check and prep
 source <(curl -fsSL https://raw.githubusercontent.com/Snake26183/nadeko-installer/refs/heads/main/vars 2>/dev/null)

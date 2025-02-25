@@ -1,5 +1,5 @@
 #!/bin/bash
-set -xe
+set -xeo pipefail
 echo ""
 echo "Welcome to NadekoBot."
 echo "Downloading the latest installer..."
